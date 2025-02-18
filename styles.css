@@ -85,6 +85,10 @@ body {
   text-align: center;
 }
 
+h1 {
+    font-size: 3rem;
+}
+
 .img-container {
     margin-top: auto;
     margin-bottom: auto;
@@ -97,6 +101,7 @@ img {
     height: auto;
     margin: 18px 0;
 }
+
 footer,button {
     background-color: #1e1e1e;
     color: wheat;
@@ -106,6 +111,7 @@ footer,button {
 button {
     border: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 footer {
