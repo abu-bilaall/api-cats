@@ -1,6 +1,7 @@
 const img = document.querySelector("img");
+const searchError = document.querySelector("p.error");
 
-function summonCat(input='cats') {
+function summonCat(input = "cats") {
   let catRequest = new Request(
     `https://api.giphy.com/v1/gifs/translate?api_key=WSykRl2DGkakEq1NstuZyd2AY7kJv7jz&s=${input}`,
     { mode: "cors" }
@@ -8,14 +9,19 @@ function summonCat(input='cats') {
 
   fetch(catRequest)
     .then(function (response) {
-      if(!response.ok) throw new Error(`Response status: ${response.status}`);
+      if (!response.ok) throw new Error(`Response status: ${response.status}`);
       return response.json();
     })
     .then(function (response) {
-      // if(Array.isArray(response)  && response.length === 0) console.log('Cat said: "Meow you! I am not coming."');
-      img.src = response.data.images.original.url;
+      if (Array.isArray(response.data) && response.data.length === 0) {
+        img.src = "./cat-not-found.png";
+      } else {
+        img.src = response.data.images.original.url;
+      }
     })
-    .catch((error) => console.error(error));
+    .catch((error) => {
+      searchError.textContent = error;
+    });
 }
 
 summonCat();
